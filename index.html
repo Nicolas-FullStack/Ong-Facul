@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Mãos Amigas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="cabecalho-barra">
+            <a href="/" class="logo-link" data-link>ONG Mãos Amigas</a>
+            <button type="button" class="botao-hamburguer" id="botaoMenu" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="menuPrincipal">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav id="menuPrincipal">
+            <a href="/" data-link>Início</a>
+            <div class="nav-dropdown">
+                <a href="/projetos.html" class="nav-dropdown__gatilho" data-link>Projetos</a>
+                <div class="nav-dropdown__menu">
+                    <a href="/projetos.html#frentes-atuacao" data-link>Frentes de Atuação</a>
+                    <a href="/projetos.html#doacoes" data-link>Campanhas de Doação</a>
+                </div>
+            </div>
+            <a href="/cadastro.html" data-link>Cadastre-se</a>
+        </nav>
+    </header>
+
+    <main id="app"></main>
+
+    <footer id="contato">
+        <h2>Fale Conosco</h2>
+        <ul>
+            <li>Telefone: (11) 4002-8922</li>
+            <li>E-mail: contato@maosamigas.org</li>
+            <li>Endereço: Rua da Solidariedade, 123 - São Paulo/SP</li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>

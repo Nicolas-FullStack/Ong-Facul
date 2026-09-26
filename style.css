@@ -1,0 +1,849 @@
+/* ============================================================
+   DESIGN SYSTEM — ONG (variáveis nativas do CSS)
+   ============================================================ */
+
+:root {
+    /* --- Cor: PRIMÁRIA (identidade institucional / verde ONG) --- */
+    --cor-primaria-500: #2e7d32;   /* base — header, links, títulos, botões */
+    --cor-primaria-600: #1b5e20;   /* hover/active — contraste mais escuro */
+    --cor-primaria-100: #e6f2e6;   /* fundo suave para destaques/alertas positivos */
+
+    /* --- Cor: SECUNDÁRIA (feedback / estado) --- */
+    --cor-secundaria-erro: #c62828;      /* erro de validação de formulário */
+    --cor-secundaria-erro-bg: #fdecea;   /* fundo suave de erro (apoio, não único indicador) */
+    --cor-secundaria-aviso: #ef6c00;     /* aviso — alertas de atenção, não bloqueantes */
+    --cor-secundaria-aviso-bg: #fff3e0;
+    --cor-secundaria-info: #0277bd;      /* informação neutra — dicas, novidades */
+    --cor-secundaria-info-bg: #e1f5fe;
+
+    /* --- Cor: NEUTRAS (texto, fundos, bordas) --- */
+    --cor-neutra-000: #ffffff;  /* branco — cards, texto sobre fundo escuro */
+    --cor-neutra-100: #f7f7f7;  /* fundo geral da página */
+    --cor-neutra-200: #e0e0e0;  /* hover de elementos claros */
+    --cor-neutra-300: #dddddd;  /* bordas de cards/inputs */
+    --cor-neutra-400: #cccccc;  /* bordas de fieldset */
+    --cor-neutra-600: #444444;  /* texto secundário (h3) */
+    --cor-neutra-700: #333333;  /* texto principal do corpo */
+    --cor-neutra-800: #2e2e2e;  /* fundo do footer */
+    --cor-neutra-900: #1a1a1a;  /* reservada — texto de alto contraste, se necessário */
+
+    /* --- Tipografia: famílias --- */
+    --fonte-base: Arial, Helvetica, sans-serif;
+
+    /* --- Tipografia: escala hierárquica (5 níveis, razão ~1.25 - Terça Maior) --- */
+    --texto-01-legenda: 0.75rem;   /* 12px — legendas, footer, microcopy */
+    --texto-02-corpo: 1rem;        /* 16px — parágrafos, inputs, botões */
+    --texto-03-subtitulo: 1.25rem; /* 20px — h3 */
+    --texto-04-titulo: 1.75rem;    /* 28px — h2 */
+    --texto-05-destaque: 2.25rem;  /* 36px — h1 */
+
+    /* --- Tipografia: peso e altura de linha --- */
+    --peso-normal: 400;
+    --peso-negrito: 700;
+    --linha-base: 1.6;
+
+    /* --- Espaçamento modular (escala base-8, estrita) --- */
+    --espaco-1: 4px;   /* micro-ajustes (padding de legend, gap fino) */
+    --espaco-2: 8px;   /* padding interno de inputs, gaps pequenos */
+    --espaco-3: 12px;  /* gap entre nav, margens de parágrafo */
+    --espaco-4: 16px;  /* padding padrão de cards e header */
+    --espaco-5: 24px;  /* padding de formulários, margem lateral do main */
+    --espaco-6: 32px;  /* padding do header/footer, espaçamento entre seções */
+    --espaco-7: 40px;  /* margem superior do footer */
+
+    /* --- Raio e transição (consistência de componentes) --- */
+    --raio-sm: 4px;
+    --raio-md: 6px;
+    --raio-pill: 20px;
+    --transicao-rapida: 0.2s ease;
+
+    /* --- Acessibilidade: anel de foco visível --- */
+    --foco-cor: #0d47a1;
+    --foco-anel: 3px solid var(--foco-cor);
+
+    /* --- Grid: colunas e gutter --- */
+    --grid-colunas: 12;
+    --grid-gutter: var(--espaco-4); /* 16px entre colunas/linhas */
+}
+
+/* ============================================================
+   BREAKPOINTS (mobile-first, 5 cenários via @media)
+   320px  -> base (sem media query, mobile pequeno)
+   480px  -> mobile grande
+   768px  -> tablet
+   1024px -> desktop pequeno
+   1440px -> desktop panorâmico
+   ============================================================ */
+
+/* ============================================================
+   RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fonte-base);
+    font-size: var(--texto-02-corpo);
+    font-weight: var(--peso-normal);
+    color: var(--cor-neutra-700);
+    background-color: var(--cor-neutra-100);
+    line-height: var(--linha-base);
+    text-align: center;
+}
+
+/* Acessibilidade: foco visível para navegação por teclado em QUALQUER elemento focável */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: var(--foco-anel);
+    outline-offset: 2px;
+}
+
+/* Acessibilidade: respeita usuários que pedem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ============================================================
+   HEADER — barra + navegação (desktop: horizontal com dropdown /
+   mobile: menu hambúrguer)
+   ============================================================ */
+header {
+    background-color: var(--cor-primaria-500);
+    padding: var(--espaco-4) var(--espaco-6);
+}
+
+/* Flexbox: distribui logo à esquerda e botão hambúrguer à direita */
+.cabecalho-barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    color: var(--cor-neutra-000);
+    font-weight: var(--peso-negrito);
+    font-size: var(--texto-03-subtitulo);
+    text-decoration: none;
+}
+
+/* Botão hambúrguer: oculto por padrão (só aparece no breakpoint mobile abaixo) */
+.botao-hamburguer {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.botao-hamburguer span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: var(--cor-neutra-000);
+    border-radius: var(--raio-sm);
+    transition: transform var(--transicao-rapida), opacity var(--transicao-rapida);
+}
+
+/* Estado aberto do hambúrguer: transforma as 3 barras em "X" */
+.botao-hamburguer[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.botao-hamburguer[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+.botao-hamburguer[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Navegação principal — desktop: linha horizontal */
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-3);
+    margin-top: var(--espaco-4);
+}
+
+header nav > a,
+.nav-dropdown__gatilho {
+    color: var(--cor-primaria-500);
+    background-color: var(--cor-neutra-000);
+    text-decoration: none;
+    font-weight: var(--peso-negrito);
+    padding: var(--espaco-2) var(--espaco-5);
+    border-radius: var(--raio-pill);
+    transition: background-color var(--transicao-rapida);
+}
+
+header nav > a:hover,
+.nav-dropdown__gatilho:hover {
+    background-color: var(--cor-neutra-200);
+}
+
+/* Corrige "sticky hover" em telas touch: em dispositivos SEM mouse, o :hover
+   grudado no toque não deve ser aplicado — só telas que realmente têm hover. */
+@media (hover: none) {
+    header nav > a:hover,
+    .nav-dropdown__gatilho:hover {
+        background-color: var(--cor-neutra-000);
+    }
+}
+
+/* Remove o retângulo cinza de "tap highlight" que alguns navegadores mobile
+   aplicam ao toque, causando a diferença visual momentânea entre os botões */
+header nav > a,
+.nav-dropdown__gatilho,
+.botao-hamburguer {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Dropdown (submenu) — só existe em telas largas via :hover / :focus-within */
+.nav-dropdown {
+    position: relative;
+    display: flex; /* faz o wrapper se comportar como os outros itens do menu... */
+    flex-direction: column;
+}
+
+/* ...e faz o gatilho ("Projetos") esticar e ficar IDÊNTICO em tamanho aos
+   demais links do menu, já que ele não é filho direto de <nav> e por isso
+   não herdava o align-items: stretch do container flex */
+.nav-dropdown__gatilho {
+    display: block;
+    width: 100%;
+}
+
+.nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: var(--espaco-1);
+    background-color: var(--cor-neutra-000);
+    border: 1px solid var(--cor-neutra-300);
+    border-radius: var(--raio-md);
+    padding: var(--espaco-2);
+    min-width: 220px;
+    flex-direction: column;
+    gap: var(--espaco-1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+/* Pseudo-classes que acionam o submenu: hover do mouse e foco por teclado (Tab) */
+.nav-dropdown:hover .nav-dropdown__menu,
+.nav-dropdown:focus-within .nav-dropdown__menu {
+    display: flex;
+}
+
+.nav-dropdown__menu a {
+    color: var(--cor-primaria-500);
+    text-decoration: none;
+    padding: var(--espaco-2);
+    border-radius: var(--raio-sm);
+    font-weight: var(--peso-normal);
+}
+
+.nav-dropdown__menu a:hover,
+.nav-dropdown__menu a:focus-visible {
+    background-color: var(--cor-primaria-100);
+}
+
+/* ============================================================
+   BREAKPOINT MOBILE (< 768px): navegação horizontal vira
+   menu hambúrguer condensado
+   ============================================================ */
+@media (max-width: 767px) {
+    .botao-hamburguer {
+        display: flex; /* mostra o hambúrguer só aqui */
+    }
+
+    /* Menu some por padrão em mobile; JS alterna a classe .nav-aberta */
+    header nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--espaco-1);
+        margin-top: var(--espaco-3);
+    }
+
+    header nav.nav-aberta {
+        display: flex;
+    }
+
+    header nav > a,
+    .nav-dropdown__gatilho {
+        text-align: center;
+        border-radius: var(--raio-sm);
+    }
+
+    /* Em mobile o submenu não usa position:absolute/hover — some parte do
+       fluxo normal e some visível junto com o menu principal */
+    .nav-dropdown__menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background-color: var(--cor-primaria-100);
+        display: none; /* controlado pela mesma classe JS do menu principal */
+    }
+
+    .nav-dropdown.nav-dropdown--aberto .nav-dropdown__menu {
+        display: flex;
+    }
+}
+
+/* ============================================================
+   TIPOGRAFIA / CONTEÚDO
+   ============================================================ */
+main {
+    max-width: 900px;
+    margin: var(--espaco-6) auto;
+    padding: 0 var(--espaco-5);
+}
+
+h1 {
+    font-size: var(--texto-05-destaque);
+    color: var(--cor-primaria-500);
+    margin-bottom: var(--espaco-4);
+}
+
+h2 {
+    font-size: var(--texto-04-titulo);
+    color: var(--cor-primaria-500);
+    margin-top: var(--espaco-6);
+    margin-bottom: var(--espaco-3);
+    border-bottom: 2px solid var(--cor-primaria-500);
+    padding-bottom: var(--espaco-1);
+}
+
+h3 {
+    font-size: var(--texto-03-subtitulo);
+    color: var(--cor-neutra-600);
+    margin-bottom: var(--espaco-2);
+}
+
+p {
+    font-size: var(--texto-02-corpo);
+    margin-bottom: var(--espaco-3);
+}
+
+/* index.html */
+#sobre img {
+    max-width: 280px;
+    display: block;
+    margin: 0 auto var(--espaco-4) auto;
+}
+
+/* ============================================================
+   GRID — sistema de 12 colunas (projetos.html)
+   ============================================================ */
+section {
+    margin-bottom: var(--espaco-6);
+}
+
+/* Container do grid: 12 colunas, mobile-first (base = 1 coluna) */
+.grid-projetos {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--grid-gutter);
+}
+
+article {
+    background-color: var(--cor-neutra-000);
+    border: 1px solid var(--cor-neutra-300);
+    border-radius: var(--raio-md);
+    padding: var(--espaco-4);
+    margin-bottom: var(--espaco-4);
+    /* dentro do grid, cada card ocupa a largura total da sua faixa de colunas */
+    grid-column: span 12;
+    /* Flexbox: empilha título e texto verticalmente, com espaçamento uniforme,
+       e garante que cards da mesma linha do grid fiquem com a mesma altura */
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    height: 100%;
+}
+
+/* Breakpoint 1 — 480px (mobile grande): 2 colunas visuais, cada card ocupa 6/12 */
+@media (min-width: 480px) {
+    .grid-projetos {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    article {
+        grid-column: span 6;
+    }
+}
+
+/* Breakpoint 2 — 768px (tablet): cada card ocupa 4/12 -> 3 colunas visuais */
+@media (min-width: 768px) {
+    article {
+        grid-column: span 4;
+    }
+}
+
+/* Breakpoint 3 — 1024px (desktop pequeno): cada card ocupa 3/12 -> 4 colunas visuais */
+@media (min-width: 1024px) {
+    article {
+        grid-column: span 3;
+    }
+    main {
+        max-width: 960px;
+    }
+}
+
+/* Breakpoint 4 — 1440px (desktop panorâmico): container mais largo, cards 3/12 mantidos, gutter maior */
+@media (min-width: 1440px) {
+    main {
+        max-width: 1200px;
+    }
+    .grid-projetos {
+        gap: var(--espaco-5);
+    }
+}
+
+/* ============================================================
+   FORMULÁRIO (cadastro.html)
+   ============================================================ */
+form {
+    background-color: var(--cor-neutra-000);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-md);
+    border: 1px solid var(--cor-neutra-300);
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: 1px solid var(--cor-neutra-400);
+    border-radius: var(--raio-md);
+    padding: var(--espaco-4);
+    margin-bottom: var(--espaco-5);
+}
+
+legend {
+    font-weight: var(--peso-negrito);
+    color: var(--cor-primaria-500);
+    padding: 0 var(--espaco-2);
+}
+
+label {
+    display: block;
+    margin-top: var(--espaco-3);
+    margin-bottom: var(--espaco-1);
+    font-weight: var(--peso-negrito);
+}
+
+/* Acessibilidade: associa visualmente o indicador de campo obrigatório sem depender só de cor/asterisco */
+label.obrigatorio::after {
+    content: " (obrigatório)";
+    font-weight: var(--peso-normal);
+    font-size: var(--texto-01-legenda);
+    color: var(--cor-neutra-600);
+}
+
+input,
+select {
+    width: 100%;
+    padding: var(--espaco-2);
+    border: 2px solid var(--cor-neutra-400);
+    border-radius: var(--raio-sm);
+    font-size: var(--texto-01-legenda);
+    background-color: var(--cor-neutra-000);
+    transition: border-color var(--transicao-rapida),
+                background-color var(--transicao-rapida),
+                box-shadow var(--transicao-rapida);
+}
+
+/* :focus — campo ativo no momento; reforça o outline global com box-shadow
+   suave, para o usuário identificar de longe qual campo está em edição */
+input:focus,
+select:focus {
+    border-color: var(--foco-cor);
+    box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
+}
+
+/* :disabled — campo bloqueado: fundo neutro e cursor indicando indisponibilidade */
+input:disabled,
+select:disabled {
+    background-color: var(--cor-neutra-100);
+    color: var(--cor-neutra-600);
+    cursor: not-allowed;
+    border-color: var(--cor-neutra-300);
+}
+
+/* Sinalização de SUCESSO — campo preenchido corretamente: borda + fundo verdes
+   (mesma lógica do erro: nunca só cor, aqui reforçado por sombra sutil também).
+   Para <select required>, o navegador já marca :invalid enquanto a opção
+   vazia ("Selecione") estiver escolhida, então :valid aqui já significa
+   "usuário escolheu uma opção real" — sem precisar de seletor de atributo. */
+input:valid:not(:placeholder-shown):not(:disabled),
+select:valid:not(:disabled) {
+    border-color: var(--cor-primaria-500);
+    background-color: var(--cor-primaria-100);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+/* Acessibilidade: erro nunca depende só da cor — soma borda + ícone/texto + fundo */
+input:invalid:not(:placeholder-shown) {
+    border-color: var(--cor-secundaria-erro);
+    background-color: var(--cor-secundaria-erro-bg);
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+}
+
+input:invalid:not(:placeholder-shown) + .mensagem-erro {
+    display: block;
+    color: var(--cor-secundaria-erro);
+    font-size: var(--texto-01-legenda);
+    margin-top: var(--espaco-1);
+}
+
+.mensagem-erro {
+    display: none;
+}
+
+button {
+    display: block;
+    margin: var(--espaco-5) auto 0 auto;
+    background-color: var(--cor-primaria-500);
+    color: var(--cor-neutra-000);
+    border: 2px solid transparent;
+    padding: var(--espaco-3) var(--espaco-5);
+    border-radius: var(--raio-sm);
+    cursor: pointer;
+    font-size: var(--texto-02-corpo);
+    transition: background-color var(--transicao-rapida),
+                transform var(--transicao-rapida),
+                box-shadow var(--transicao-rapida),
+                opacity var(--transicao-rapida);
+}
+
+/* :hover — feedback de "isto é clicável", sem exigir clique */
+button:hover:not(:disabled) {
+    background-color: var(--cor-primaria-600);
+}
+
+/* :focus-visible — anel de foco específico do botão (teclado/Tab), além do
+   outline global já definido — reforça contorno com box-shadow em camadas */
+button:focus-visible {
+    box-shadow: 0 0 0 3px var(--cor-neutra-000), 0 0 0 6px var(--foco-cor);
+}
+
+/* :active — feedback de "pressionado no exato instante do clique":
+   escurece mais que o hover e recua visualmente (translateY) */
+button:active:not(:disabled) {
+    background-color: var(--cor-primaria-600);
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* :disabled — remove affordance de clique: opacidade reduzida, cursor bloqueado,
+   sem transição de hover/active (impede feedback de que é clicável) */
+button:disabled {
+    background-color: var(--cor-neutra-400);
+    color: var(--cor-neutra-600);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.botao-secundario {
+    background-color: var(--cor-neutra-000);
+    color: var(--cor-primaria-500);
+    border: 2px solid var(--cor-primaria-500);
+}
+
+.botao-secundario:hover:not(:disabled) {
+    background-color: var(--cor-primaria-100);
+}
+
+.botao-secundario:active:not(:disabled) {
+    background-color: var(--cor-primaria-100);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.botao-secundario:disabled {
+    background-color: var(--cor-neutra-100);
+    color: var(--cor-neutra-400);
+    border-color: var(--cor-neutra-300);
+}
+
+/* Flexbox: linha de ações do formulário — "Limpar" e "Cadastrar" lado a lado,
+   empilhando em coluna se a tela for estreita demais para os dois botões */
+.form-acoes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--espaco-3);
+    margin-top: var(--espaco-5);
+}
+
+.form-acoes button {
+    margin: 0; /* remove o auto-centralizado do seletor genérico "button" acima */
+}
+
+@media (max-width: 479px) {
+    .form-acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    background-color: var(--cor-neutra-800);
+    color: var(--cor-neutra-000);
+    padding: var(--espaco-5) var(--espaco-6);
+    margin-top: var(--espaco-7);
+}
+
+footer h2 {
+    color: var(--cor-neutra-000);
+    border-bottom: 2px solid var(--cor-neutra-000);
+    font-size: var(--texto-01-legenda);
+    display: inline-block;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer a {
+    color: var(--cor-neutra-000);
+}
+
+footer p {
+    font-size: var(--texto-01-legenda);
+    color: var(--cor-neutra-400);
+    margin-top: var(--espaco-2);
+}
+
+/* ============================================================
+   COMPONENTES DE FEEDBACK — badges, alertas, toast, modal
+   (padrão pronto para reuso pelo back-end: classes semânticas
+   por variante, nunca cor isolada — sempre com ícone/texto junto)
+   ============================================================ */
+
+/* --- BADGES: categorização semântica de conteúdo (ex.: cards de projeto) --- */
+.badge {
+    display: inline-block;
+    font-size: var(--texto-01-legenda);
+    font-weight: var(--peso-negrito);
+    padding: var(--espaco-1) var(--espaco-3);
+    border-radius: var(--raio-pill);
+    border: 1px solid transparent;
+    line-height: 1;
+}
+
+.badge--sucesso {
+    background-color: var(--cor-primaria-100);
+    color: var(--cor-primaria-600);
+    border-color: var(--cor-primaria-500);
+}
+
+.badge--erro {
+    background-color: var(--cor-secundaria-erro-bg);
+    color: var(--cor-secundaria-erro);
+    border-color: var(--cor-secundaria-erro);
+}
+
+.badge--aviso {
+    background-color: var(--cor-secundaria-aviso-bg);
+    color: var(--cor-secundaria-aviso);
+    border-color: var(--cor-secundaria-aviso);
+}
+
+.badge--info {
+    background-color: var(--cor-secundaria-info-bg);
+    color: var(--cor-secundaria-info);
+    border-color: var(--cor-secundaria-info);
+}
+
+.badge--neutro {
+    background-color: var(--cor-neutra-100);
+    color: var(--cor-neutra-600);
+    border-color: var(--cor-neutra-300);
+}
+
+/* --- ALERTAS: caixa de destaque dentro do fluxo da página (não flutuante) --- */
+.alerta {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--espaco-3);
+    text-align: left;
+    padding: var(--espaco-4);
+    border-radius: var(--raio-md);
+    border: 1px solid transparent;
+    border-left-width: 5px;
+    margin-bottom: var(--espaco-4);
+}
+
+.alerta__icone {
+    font-weight: var(--peso-negrito);
+    font-size: var(--texto-03-subtitulo);
+    line-height: 1;
+}
+
+.alerta__conteudo {
+    flex: 1;
+}
+
+.alerta__titulo {
+    font-weight: var(--peso-negrito);
+    margin-bottom: var(--espaco-1);
+    display: block;
+}
+
+.alerta--sucesso {
+    background-color: var(--cor-primaria-100);
+    border-color: var(--cor-primaria-500);
+    color: var(--cor-primaria-600);
+}
+
+.alerta--erro {
+    background-color: var(--cor-secundaria-erro-bg);
+    border-color: var(--cor-secundaria-erro);
+    color: var(--cor-secundaria-erro);
+}
+
+.alerta--aviso {
+    background-color: var(--cor-secundaria-aviso-bg);
+    border-color: var(--cor-secundaria-aviso);
+    color: var(--cor-secundaria-aviso);
+}
+
+.alerta--info {
+    background-color: var(--cor-secundaria-info-bg);
+    border-color: var(--cor-secundaria-info);
+    color: var(--cor-secundaria-info);
+}
+
+/* --- TOAST: notificação não obstrutiva, flutuante, some sozinha --- */
+.toast-container {
+    position: fixed;
+    bottom: var(--espaco-5);
+    right: var(--espaco-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    z-index: 100;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    background-color: var(--cor-neutra-800);
+    color: var(--cor-neutra-000);
+    padding: var(--espaco-3) var(--espaco-4);
+    border-radius: var(--raio-md);
+    border-left: 5px solid var(--cor-primaria-500);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: var(--texto-02-corpo);
+    min-width: 260px;
+    max-width: 340px;
+    text-align: left;
+    /* animação de entrada: desliza e aparece, sem movimento brusco */
+    animation: toast-entrada 0.3s ease-out;
+}
+
+.toast--erro {
+    border-left-color: var(--cor-secundaria-erro);
+}
+
+.toast--aviso {
+    border-left-color: var(--cor-secundaria-aviso);
+}
+
+@keyframes toast-entrada {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        animation: none;
+    }
+}
+
+/* --- MODAL: caixa de diálogo bloqueante, com overlay --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--espaco-4);
+    z-index: 200;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal {
+    background-color: var(--cor-neutra-000);
+    border-radius: var(--raio-md);
+    padding: var(--espaco-5);
+    max-width: 420px;
+    width: 100%;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal__cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--espaco-3);
+}
+
+.modal__titulo {
+    color: var(--cor-primaria-500);
+    font-size: var(--texto-04-titulo);
+}
+
+.modal__fechar {
+    background: transparent;
+    border: none;
+    color: var(--cor-neutra-600);
+    font-size: var(--texto-04-titulo);
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.modal__acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espaco-3);
+    margin-top: var(--espaco-5);
+}
+
+.modal__acoes button {
+    margin: 0;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Mãos Amigas - Guia de Estilo (componentes de feedback)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="cabecalho-barra">
+            <a href="index.html" class="logo-link">ONG Mãos Amigas</a>
+            <button type="button" class="botao-hamburguer" id="botaoMenu" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="menuPrincipal">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav id="menuPrincipal">
+            <a href="index.html">Início</a>
+            <div class="nav-dropdown">
+                <a href="projetos.html" class="nav-dropdown__gatilho">Projetos</a>
+                <div class="nav-dropdown__menu">
+                    <a href="projetos.html#frentes-atuacao">Frentes de Atuação</a>
+                    <a href="projetos.html#doacoes">Campanhas de Doação</a>
+                </div>
+            </div>
+            <a href="cadastro.html">Cadastre-se</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Guia de Estilo — Componentes de Feedback</h1>
+        <p>Referência para desenvolvedores de back-end: classes prontas, sem necessidade de CSS adicional.</p>
+
+        <section id="secao-badges">
+            <h2>Badges</h2>
+            <p>Uso: <code>&lt;span class="badge badge--variante"&gt;</code></p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+                <span class="badge badge--sucesso">Ativo</span>
+                <span class="badge badge--erro">Encerrado</span>
+                <span class="badge badge--aviso">Vagas limitadas</span>
+                <span class="badge badge--info">Prazo definido</span>
+                <span class="badge badge--neutro">Contínua</span>
+            </div>
+        </section>
+
+        <section id="secao-alertas">
+            <h2>Alertas</h2>
+            <p>Uso: <code>&lt;div class="alerta alerta--variante"&gt;</code></p>
+
+            <div class="alerta alerta--sucesso" role="status">
+                <span class="alerta__icone" aria-hidden="true">✓</span>
+                <div class="alerta__conteudo">
+                    <span class="alerta__titulo">Sucesso</span>
+                    Cadastro realizado corretamente.
+                </div>
+            </div>
+
+            <div class="alerta alerta--erro" role="alert">
+                <span class="alerta__icone" aria-hidden="true">✕</span>
+                <div class="alerta__conteudo">
+                    <span class="alerta__titulo">Erro</span>
+                    Não foi possível concluir a operação. Verifique os dados.
+                </div>
+            </div>
+
+            <div class="alerta alerta--aviso" role="alert">
+                <span class="alerta__icone" aria-hidden="true">!</span>
+                <div class="alerta__conteudo">
+                    <span class="alerta__titulo">Aviso</span>
+                    A campanha do agasalho encerra em 5 dias.
+                </div>
+            </div>
+
+            <div class="alerta alerta--info" role="note">
+                <span class="alerta__icone" aria-hidden="true">ℹ</span>
+                <div class="alerta__conteudo">
+                    <span class="alerta__titulo">Informação</span>
+                    As inscrições de voluntariado são feitas pelo formulário de cadastro.
+                </div>
+            </div>
+        </section>
+
+        <section id="secao-toast-modal">
+            <h2>Toast e Modal</h2>
+            <p>Clique nos botões para ver os componentes em ação.</p>
+            <button type="button" id="botaoMostrarToast">Mostrar toast</button>
+            <button type="button" id="botaoAbrirModal" class="botao-secundario" style="margin-top:8px;">Abrir modal</button>
+        </section>
+    </main>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <div class="modal-overlay" id="modalExemplo" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+            <div class="modal__cabecalho">
+                <h2 class="modal__titulo" id="modalTitulo">Confirmar ação</h2>
+                <button type="button" class="modal__fechar" id="modalFechar" aria-label="Fechar modal">&times;</button>
+            </div>
+            <p>Este é um exemplo de modal — usado para decisões que exigem confirmação explícita do usuário antes de continuar.</p>
+            <div class="modal__acoes">
+                <button type="button"> 

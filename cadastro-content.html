@@ -1,0 +1,85 @@
+<h1>Cadastre-se como Apoiador</h1>
+
+<form id="frmCadastro">
+    <fieldset>
+        <legend>Dados Pessoais</legend>
+
+        <label for="txtNome" class="obrigatorio">Nome completo</label>
+        <input type="text" id="txtNome" name="nome" required>
+        <span class="mensagem-erro">Informe o nome completo.</span>
+
+        <label for="txtCpf" class="obrigatorio">CPF</label>
+        <input type="text" id="txtCpf" name="cpf"
+                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                placeholder="000.000.000-00"
+                title="Formato esperado: 000.000.000-00" required>
+        <span class="mensagem-erro">Use o formato 000.000.000-00.</span>
+
+        <label for="txtEmail" class="obrigatorio">E-mail</label>
+        <input type="email" id="txtEmail" name="email" required>
+        <span class="mensagem-erro">Informe um e-mail válido.</span>
+
+        <label for="txtNascimento" class="obrigatorio">Data de nascimento</label>
+        <input type="date" id="txtNascimento" name="nascimento" required>
+        <span class="mensagem-erro">Informe a data de nascimento.</span>
+    </fieldset>
+
+    <fieldset>
+        <legend>Endereço</legend>
+
+        <label for="txtCep" class="obrigatorio">CEP</label>
+        <input type="text" id="txtCep" name="cep"
+                pattern="\d{5}-\d{3}"
+                placeholder="00000-000"
+                title="Formato esperado: 00000-000" required>
+        <span class="mensagem-erro">Use o formato 00000-000.</span>
+
+        <label for="txtEndereco" class="obrigatorio">Endereço</label>
+        <input type="text" id="txtEndereco" name="endereco" required>
+        <span class="mensagem-erro">Informe o endereço.</span>
+
+        <label for="txtCidade" class="obrigatorio">Cidade</label>
+        <input type="text" id="txtCidade" name="cidade" required>
+        <span class="mensagem-erro">Informe a cidade.</span>
+
+        <label for="txtEstado" class="obrigatorio">Estado</label>
+        <select id="txtEstado" name="estado" required>
+            <option value="">Selecione</option>
+            <option value="SP">São Paulo</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="MG">Minas Gerais</option>
+        </select>
+    </fieldset>
+
+    <fieldset>
+        <legend>Contato</legend>
+
+        <label for="txtTelefone">Telefone</label>
+        <input type="tel" id="txtTelefone" name="telefone" 
+                pattern="\(\d{2}\) \d{4,5}-\d{4}"
+                placeholder="(00) 00000-0000"
+                title="Formato esperado: (00) 00000-0000">
+        <span class="mensagem-erro">Use o formato (00) 00000-0000.</span>
+    </fieldset>
+
+    <fieldset>
+        <legend>Tipo de Colaboração</legend>
+
+        <label for="slcTipo" class="obrigatorio">Como deseja colaborar?</label>
+        <select id="slcTipo" name="tipoColaboracao" required>
+            <option value="">Selecione</option>
+            <option value="voluntario">Voluntário</option>
+            <option value="doador">Doador</option>
+        </select>
+    </fieldset>
+
+    <div class="form-acoes">
+        <button type="reset" class="botao-secundario">Limpar formulário</button>
+        <button type="submit">Cadastrar</button>
+    </div>
+</form>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<script src="feedback.js"></script>
+<script src="cadastro.js"></script>

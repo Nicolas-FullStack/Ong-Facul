@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Mãos Amigas - Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="cabecalho-barra">
+            <a href="index.html" class="logo-link">ONG Mãos Amigas</a>
+            <button type="button" class="botao-hamburguer" id="botaoMenu" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="menuPrincipal">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav id="menuPrincipal">
+            <a href="index.html">Início</a>
+            <div class="nav-dropdown">
+                <a href="projetos.html" class="nav-dropdown__gatilho">Projetos</a>
+                <div class="nav-dropdown__menu">
+                    <a href="projetos.html#frentes-atuacao">Frentes de Atuação</a>
+                    <a href="projetos.html#doacoes">Campanhas de Doação</a>
+                </div>
+            </div>
+            <a href="cadastro.html">Cadastre-se</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Nossos Projetos Sociais</h1>
+
+        <section id="frentes-atuacao">
+            <h2>Frentes de Atuação</h2>
+            <div class="grid-projetos" id="gridFrentes"></div>
+        </section>
+
+        <section id="voluntariado">
+            <h2>Voluntariado</h2>
+            <div class="alerta alerta--info" role="note">
+                <span class="alerta__icone" aria-hidden="true">ℹ</span>
+                <div class="alerta__conteudo">
+                    <span class="alerta__titulo">Requisitos para voluntariado</span>
+                    Para se tornar voluntário, é necessário ter mais de 18 anos e disponibilidade mínima de 4 horas semanais. As inscrições são feitas através do formulário de cadastro, selecionando a opção "Voluntário" no momento do registro.
+                </div>
+            </div>
+        </section>
+
+        <section id="doacoes">
+            <h2>Campanhas de Doação</h2>
+            <div class="grid-projetos">
+                <article>
+                    <span class="badge badge--info">Prazo definido</span>
+                    <h3>Campanha do Agasalho</h3>
+                    <p>Meta: 500 peças de roupa de frio. Prazo: até 30 de setembro.</p>
+                </article>
+                <article>
+                    <span class="badge badge--neutro">Contínua</span>
+                    <h3>Cesta Básica Solidária</h3>
+                    <p>Meta: R$ 15.000 em arrecadação. Prazo: contínuo, mensal.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ONG Mãos Amigas. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="nav.js"></script>
+    <script src="projetos.js"></script>
+</body>
+</html>
