@@ -1,3 +1,5 @@
+// Módulo responsável pela validação e envio dos dados do formulário de cadastro
+
 (function () {
     const form = document.getElementById('frmCadastro');
     if (form) {
