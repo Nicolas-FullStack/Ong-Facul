@@ -51,3 +51,5 @@
         });
     }
 })();
+
+// Exibe a listagem de projetos cadastrados e seus detalhes
