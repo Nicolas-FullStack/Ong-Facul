@@ -1,3 +1,5 @@
+// Gerencia o envio e exibição de feedbacks dos usuários
+
 function mostrarToast(mensagem, variante) {
     var container = document.getElementById('toastContainer');
     if (!container) return;
